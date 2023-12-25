@@ -10,6 +10,8 @@ Le mot-clé RIGHT JOIN renvoie tous les enregistrements de la table de droite (t
 et les enregistrements correspondants de la table de gauche (table1). 
 Le résultat est 0 enregistrement du côté gauche, s'il n'y a pas de correspondance.
 
+Cette instruction ne semblerait pas marcher avec SQLITE
+
 Date : 24-12-23
 */
 
