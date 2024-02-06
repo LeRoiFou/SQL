@@ -6,7 +6,6 @@ Github le coin stat : https://github.com/LeCoinStat/LeCoinStat/tree/main/Bien_De
 Fichiers Github récupérés : https://github.com/LeCoinStat/LeCoinStat/tree/main/Bien_Debuter_SQL/Jour4
 
 Date : 05-02-2024
-Temps : 00:29:20
 
 ======================================== JOIN ==============================================
 Syntaxe :
@@ -22,7 +21,6 @@ n'apparaît qu'une seule fois.
 */
 
 -- Donner pour chaque vente, le nom et le prénom de l'employé qui réalisé la vente :
-
 -- Première approche : produit cartésien
 SELECT 
     *
@@ -47,3 +45,35 @@ FROM
     ventes
         JOIN
     employes USING (EmployeID);
+    
+-- Donner pour chaque produit de la base de données le nom, l'adresse et le n° de téléphone de son fournisseur
+SELECT 
+    NomProduit AS Produit,
+    NomFournisseur AS Nom,
+    Adresse,
+    NumeroTelephone AS Telephone
+FROM
+    produits
+        JOIN
+    fournisseurs USING (FournisseurID)
+ORDER BY Produit ASC , Nom ASC;
+
+-- Donner le nom et prénom des employés ayant réalisé la somme des ventes les plus élevées
+SELECT 
+    Nom, Prenom, SUM(MontantTotal) AS TotalVentes
+FROM
+    employes
+        JOIN
+    ventes USING (EmployeID)
+GROUP BY Nom , Prenom -- Récupération des colonnes de tables de dimension avant la colonne agrégée d'une table de faits
+ORDER BY TotalVentes DESC;
+
+-- Donner pour chaque client, le nom, le prénom, l'adresse ainsi que le nombre d'achats réalisé
+SELECT 
+    Nom, Prenom, Adresse, COUNT(MontantTotal) AS NombreAchats
+FROM
+    clients
+        JOIN
+    ventes USING (ClientID)
+GROUP BY Nom , Prenom , Adresse -- Récupération des colonnes de tables de dimension avant la colonne agrégée
+ORDER BY NombreAchats DESC;
