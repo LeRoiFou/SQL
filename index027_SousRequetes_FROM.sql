@@ -5,8 +5,7 @@ Lien : https://www.youtube.com/watch?v=kawRFZMQ-60
 Github le coin stat : https://github.com/LeCoinStat/LeCoinStat/tree/main/Bien_Debuter_SQL
 Fichiers Github récupérés : https://github.com/LeCoinStat/LeCoinStat/tree/main/Bien_Debuter_SQL/Jour5
 
-Date : 
-00:52:40
+Date : 10-02-24
 ============================================ Sous-requête FROM =========================================================
 Utilisation de sous-requêtes dans la clause FROM pour créer des tables temporaires
 
@@ -23,4 +22,54 @@ comme n'importe quelle autre table dans la requête principale.
 Conseil :
 - Donnez des alias clairs aux sous-tables pour améliorer la lisibilité de vos requêtes.
 - Préfiltrez autant que possible dans la sous-requête pour réduire la charge de traitement dans la requête principale.
-/*
+*/
+
+-- Donner pour chaque employé, le nom, le prénom et la moyenne des ventes annuelles
+SELECT 
+    EmployeID, ROUND(AVG(TotalVentes), 0) AS MeanCA
+FROM
+    (SELECT 
+        EmployeID,
+            YEAR(DateVente) AS Annee,
+            SUM(MontantTotal) AS TotalVentes
+    FROM
+        ventes
+    GROUP BY EmployeID , Annee) AS temp
+GROUP BY EmployeID;
+
+-- Quel est le taux de croissance du CA entre 2021 et 20222
+SELECT 
+    (CA2022 - CA2021) / CA2021 AS TxCroissance
+FROM
+    (SELECT 
+        SUM(MontantTotal) AS CA2022
+    FROM
+        ventes
+    WHERE
+        YEAR(DateVente) = 2022) AS temp,
+    (SELECT 
+        SUM(MontantTotal) AS CA2021
+    FROM
+        ventes
+    WHERE
+        YEAR(DateVente) = 2021) AS temp2;
+        
+-- Donner la liste des 10 clients dont la moyenne du nombre d'achats annuels est la plus élevée
+SELECT 
+    ClientID,
+    Nom,
+    Prenom,
+    ROUND(AVG(NbAchats), 0) AS Moyenne
+FROM
+    (SELECT 
+        ClientID,
+		YEAR(DateVente) AS Annee,
+		COUNT(VenteID) AS NbAchats
+    FROM
+        ventes
+    GROUP BY ClientID , Annee) AS temp
+LEFT JOIN
+    clients USING (ClientID)
+GROUP BY ClientID, Nom, Prenom
+ORDER BY Moyenne DESC
+LIMIT 10;
