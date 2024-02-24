@@ -30,7 +30,7 @@ SELECT
     EmployeID, COUNT(VenteID) AS NombreVentes
 FROM
     ventes
-GROUP BY EmployeID , VenteID
+GROUP BY EmployeID
 ORDER BY VenteID DESC;
 
 -- Somme des ventes journalières par trie croissant
@@ -38,12 +38,12 @@ SELECT
     DateVente, SUM(MontantTotal) AS CAJournalier
 FROM
     ventes
-GROUP BY DateVente , MontantTotal
+GROUP BY DateVente
 ORDER BY DateVente ASC;
 
 -- Somme des ventes par année par trie croissant
 SELECT 
-    YEAR(DateVente) AS Annee, SUM(MontantTotal) AS MoyenneCA
+    YEAR(DateVente) AS Annee, SUM(MontantTotal) AS CAHT
 FROM
     ventes
 GROUP BY Annee
@@ -58,3 +58,12 @@ FROM
     ventes
 GROUP BY EmployeID , Annee
 ORDER BY EmployeID ASC , Annee ASC;
+
+-- Donner la liste des 5 employés ayant réalisé le plus gros du CAHT
+SELECT 
+    EmployeID, SUM(MontantTotal) AS TotalVentes
+FROM
+    ventes
+GROUP BY EmployeID
+ORDER BY TotalVentes DESC
+LIMIT 5;

@@ -17,13 +17,13 @@ FROM nom_table;
 
 -- Montant des ventes le plus faible
 SELECT 
-    MIN(MontantTotal) AS "CAHT le plus bas"
+    MIN(MontantTotal) AS "Vente_MIN"
 FROM
     ventes;
 
 -- Montant des ventes le plus important
 SELECT 
-    MAX(MontantTotal) AS "CAHT le plus haut"
+    MAX(MontantTotal) AS "Vente_MAX"
 FROM
     ventes;
     

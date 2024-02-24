@@ -19,7 +19,7 @@ que de générer une table et permet d'être récupérer pour effectuer d'autres
 La vue créée se trouve dans le menu à gauche "SCHEMAS" (rafraîchir la base de données)
 */
 
--- Créez une vue des ventes ventes_2021de l'année 2021
+-- Créez une vue des ventes ventes_2021 de l'année 2021
 CREATE VIEW ventes_2021 AS
     SELECT 
         *
@@ -28,13 +28,7 @@ CREATE VIEW ventes_2021 AS
     WHERE
         YEAR(DateVente) = 2021;
 
--- Affichage de la vue générée ci-avant
-SELECT 
-    *
-FROM
-    ventes_2021;
-
--- Liste des clients qui ont réalisé plus d'un achat en 2021
+-- À partir de la vue créée : ventes_2021, donner la liste des clients qui ont réalisé plus d'un achat en 2021
 SELECT 
     ClientID, Nom, Prenom, COUNT(VenteID) AS NombreAchats
 FROM
@@ -44,7 +38,7 @@ FROM
 GROUP BY ClientID , Nom , Prenom
 HAVING NombreAchats > 1;
 
--- Donner la liste des employés qui ont réalisé des ventes moyennes supérieures à 500 en 2021
+--  À partir de la vue créée : ventes_2021, donner la liste des employés qui ont réalisé des ventes moyennes supérieures à 500 en 2021
 SELECT 
     EmployeID,
     Nom,
@@ -67,9 +61,4 @@ CREATE VIEW ventes_500 AS
     WHERE
         PrixUnitaire > 500;
 
--- Affichage de la vue générée ci-avant
-SELECT 
-    *
-FROM
-    ventes_500;
     

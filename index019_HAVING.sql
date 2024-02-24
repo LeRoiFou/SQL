@@ -30,12 +30,3 @@ FROM
 GROUP BY EmployeID , Annee
 HAVING MoyenneCA > 1000
 ORDER BY EmployeID ASC , MoyenneCA DESC;
-
--- Donner la liste des 5 employés ayant réalisé le plus gros du CAHT
-SELECT 
-    EmployeID, SUM(MontantTotal) AS TotalVentes
-FROM
-    ventes
-GROUP BY EmployeID
-ORDER BY TotalVentes DESC
-LIMIT 5;

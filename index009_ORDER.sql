@@ -25,7 +25,7 @@ FROM
     produits
 ORDER BY PrixUnitaire DESC;
 
--- Donner les noms par ordre croissant et les prénoms par ordre décroissant
+-- Donner les noms des employés par ordre croissant et les prénoms par ordre décroissant
 SELECT 
     *
 FROM

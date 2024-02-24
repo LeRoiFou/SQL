@@ -17,12 +17,7 @@ FROM nom_table;
 
 -- Combien y-a-t'il de client dans la base de données ?
 SELECT 
-    COUNT(*) AS "Nombre de clients"
+    COUNT(ClientID) AS "Nombre de clients"
 FROM
     clients;
 
--- Compter le nombre d'identifiants présents dans la base de données
-SELECT 
-    COUNT(ClientID) AS "Nombre d'identifiants"
-FROM
-    clients;

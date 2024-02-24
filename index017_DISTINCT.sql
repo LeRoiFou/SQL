@@ -10,6 +10,9 @@ Date : 03-02-2024
 ======================================== Fonctions d'agrégation : DISTINCT =====================================
 Les fonctions d'agrégation récupèrent un ensemble de valeurs pour en restituer une seule
 
+Syntaxe:
+SELECT Aggregation(DISTINCT(Colonne)) FROM table;
+
 L'instruction DISTINCT() permet de récupérer les valeurs uniques
 */
 
@@ -27,12 +30,12 @@ FROM
     
 -- Montant max du CAHT en prenant les valeurs uniques
 SELECT 
-    MIN(DISTINCT (MontantTotal)) AS "CAHT max"
+    MAX(DISTINCT (MontantTotal)) AS "CAHT max"
 FROM
     ventes;
     
 -- Montant min CAHT en prenant les valeurs uniques
 SELECT 
-    AVG(DISTINCT (MontantTotal)) AS "CAHT min"
+    MIN(DISTINCT (MontantTotal)) AS "CAHT min"
 FROM
     ventes;
