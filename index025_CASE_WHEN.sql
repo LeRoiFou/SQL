@@ -48,7 +48,7 @@ FROM
 
 -- Écrire une requête permettant d'afficher pour chaque employe, son nom, son prénom, ainsi que 
 -- le nombre de ventes réalisée et une variable qui indique si le nombre de vente est inférieur
--- à 50, ou compris entre 50 et 100, ou supérieur à 100
+-- à 1, ou compris entre 1 et 2, ou supérieur à 2
 SELECT 
     EmployeID,
     Nom,
@@ -74,6 +74,7 @@ ORDER BY NbreVentes DESC , Nom ASC;
 -- Si le montant total des achats du client < 1 000 € : SILVER
 -- Entre 1 000 € et 5 000 € : GOLD
 -- Supérieur à 5 000 € : premium
+-- Attention : piège !
 SELECT 
     ClientID,
     Nom,
